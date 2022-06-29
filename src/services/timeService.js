@@ -36,6 +36,13 @@ const days = [
         value: 0
     }
 ]
+const getCalendar = async () => {
+    const calendar = await TimeTableModel.find().populate('training_id');
+    return {
+        code: 200,
+        data: calendar
+    };
+};
 const saveCalendar = async (calendar) => {
     let newDate = new Date(calendar.startDate);
     let endDate = new Date(calendar.endDate);
@@ -70,7 +77,6 @@ const saveCalendar = async (calendar) => {
     };
 };
 const saveRegister = async (register) => {
-
     const changedStatus = await changeStatus(register.training_id, "Бүртгэл эхэлсэн");
     
     return {
@@ -84,5 +90,5 @@ const saveRegister = async (register) => {
 
 
 module.exports = {
-    saveCalendar, saveRegister
+    saveCalendar, saveRegister, getCalendar
 };
