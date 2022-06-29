@@ -69,8 +69,20 @@ const saveCalendar = async (calendar) => {
         },
     };
 };
+const saveRegister = async (register) => {
+
+    const changedStatus = await changeStatus(register.training_id, "Бүртгэл эхэлсэн");
+    
+    return {
+        code: 200,
+        data: {
+            training_id: register.training_id,
+            changedStatus: changedStatus
+        },
+    };
+};
 
 
 module.exports = {
-    saveCalendar
+    saveCalendar, saveRegister
 };
